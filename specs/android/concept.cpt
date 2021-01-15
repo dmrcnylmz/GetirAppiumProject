@@ -1,0 +1,33 @@
+
+# <username> ve <password> bilgileriyle login olunur.
+* "Username_Area" li elementi bul, tıkla ve <text> değerini yaz
+* "Password_Area" li elementi bul, tıkla ve <text> değerini yaz
+* "Submit_Button" li elementi bul ve tıkla
+* "Getir_Logo" li element "5" süresince sayfada bulunuyor mu kontrol et
+* Gauge rapora "Başarılı şekilde login işlemi gerçekleştirildi." mesajını yaz ve ekran görüntüsü al
+
+# <username> ve <password> dataları ile başarısız login kontrolü yapılır
+ * "Username_Area" li elementi bul, tıkla ve <text> değerini yaz
+ * "Password_Area" li elementi bul, tıkla ve <text> değerini yaz
+ * "Submit_Button" li elementi bul ve tıkla
+ * "Fail_Login_Toast_Message" elementinin textinin "There is an error please review your information and try again" olduğunu kontrol eder
+ * Gauge rapora "Login işleminde başarılı giriş gerçekleştirilemedi" mesajını yaz ve ekran görüntüsü al
+
+ # Logout işlemi yapılır
+ * "Profile_Button" li elementi bul ve tıkla
+ * "LogOut_Button" li elementi bul ve tıkla
+ * "Submit_Button" li element "5" süresince sayfada bulunuyor mu kontrol et
+ * Gauge rapora "Logout olma senaryosu başarılı olarak tamamlandı" mesajını yaz ve ekran görüntüsü al
+
+ # <category> kategorisine git <element> elementi ile text kontrolü sağla ve buradan sepete rastgele ürün ekle
+ * <element> elementinin textinin <category> olduğunu kontrol eder
+ * <element> li elementi bul ve tıkla
+ * Rastgele sepete ürün ekle
+ * "categoryDetailBackButton" li elementi bul ve tıkla
+ * "Getir_Logo" li element "5" süresince sayfada bulunuyor mu kontrol et
+
+
+ # Rastgele sepete ürün ekle
+ * "1" saniye bekle
+
+
