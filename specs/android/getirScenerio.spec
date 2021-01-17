@@ -15,7 +15,9 @@ Case:1 Fail Login
 
 //fail login çokla
 
-//extra case
+Case:Extra Fail durumunda rapor oluştur
+--------------------------------------
+* "deneme2" ve "deneme2" dataları ile başarısız login kontrolü yapılır
 
 Case:1 Logout
 -------------

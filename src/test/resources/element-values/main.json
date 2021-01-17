@@ -36,9 +36,9 @@
     "androidType": "id"
   },
   {
-    "key": "CategoryList",
-    "androidValue": "com.getir.casestudy.dev:id/mainRecyclerView",
-    "androidType": "id"
+    "key": "Category_List",
+    "androidValue": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup/android.widget.FrameLayout/android.widget.TextView",
+    "androidType": "xpath"
   },
   {
     "key": "LogOut_Button",

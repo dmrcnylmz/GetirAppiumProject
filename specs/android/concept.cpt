@@ -1,14 +1,15 @@
 
 # <username> ve <password> bilgileriyle login olunur.
-* "Username_Area" li elementi bul, tıkla ve <text> değerini yaz
-* "Password_Area" li elementi bul, tıkla ve <text> değerini yaz
+* "Username_Area" li elementi bul, tıkla ve <username> değerini yaz
+* "Password_Area" li elementi bul, tıkla ve <password> değerini yaz
 * "Submit_Button" li elementi bul ve tıkla
 * "Getir_Logo" li element "5" süresince sayfada bulunuyor mu kontrol et
+* Anasayfadaki kategorileri kontrol et
 * Gauge rapora "Başarılı şekilde login işlemi gerçekleştirildi." mesajını yaz ve ekran görüntüsü al
 
 # <username> ve <password> dataları ile başarısız login kontrolü yapılır
- * "Username_Area" li elementi bul, tıkla ve <text> değerini yaz
- * "Password_Area" li elementi bul, tıkla ve <text> değerini yaz
+ * "Username_Area" li elementi bul, tıkla ve <username> değerini yaz
+ * "Password_Area" li elementi bul, tıkla ve <password> değerini yaz
  * "Submit_Button" li elementi bul ve tıkla
  * "Fail_Login_Toast_Message" elementinin textinin "There is an error please review your information and try again" olduğunu kontrol eder
  * Gauge rapora "Login işleminde başarılı giriş gerçekleştirilemedi" mesajını yaz ve ekran görüntüsü al

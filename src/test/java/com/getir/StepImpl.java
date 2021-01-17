@@ -221,37 +221,6 @@ public class StepImpl extends HookImpl {
         findElementWithAssertion(MobileBy.xpath("(.//*[contains(@value,'" + value + "')])[" + index + "]")).click();
     }
 
-    @Step("Uygulamanın açıldığını kontrol et")
-    public void checkApp() throws InterruptedException {
-        logger.info("Uygulamanin acildigini kontrol et");
-        if (appiumDriver instanceof AndroidDriver) {
-            existClickByKey("reddetButonu");
-            clickBybackButton();
-            waitBySecond(10);
-        } else {
-            existClickByKey("reddetButonu");
-            waitBySecond(10);
-        }
-
-    }
-
-    @Step("Kullanıcı girişi yapılmışsa çıkış yap")
-    public void logout() throws InterruptedException {
-        waitBySecond(3);
-        if (!appiumDriver.getPageSource().contains("Giriş Yap")) {
-            logger.info("Giris yap yok");
-            clickByKey("profilSekmesiBtn");
-            waitBySecond(3);
-            swipe(2);
-            clickByKeyWithSwipe("profilAyarGit");
-            waitBySecond(3);
-            swipe(2);
-            clickByKeyWithSwipe("cikisButonu");
-            clickByKey("popupCikisYapButonu");
-            waitBySecond(5);
-            getPageSourceFindWord("Giriş Yap");
-        }
-    }
 
 
     @Step({"<key> li elementi bul ve tıkla", "Click element by <key>"})
@@ -269,17 +238,6 @@ public class StepImpl extends HookImpl {
     }
 
 
-    @Step("giris yap butonuna tikla")
-    public void clickLoginButton() throws InterruptedException {
-
-        newWebDriverWait(30, 1000);
-
-        findElementWithAssertion(By.id("com.ttech.android.onlineislem:id/buttonPasswordContinue")).click();
-
-        waitBySecond(5);
-        existClickByKey("dinamikKartlarıKapatmaIkonu");
-    }
-
 
     @Step({"<key> li elementi bul ve varsa tıkla", "Click element by <key> if exist"})
     public void existClickByKey(String key) {
@@ -296,19 +254,7 @@ public class StepImpl extends HookImpl {
         }
     }
 
-    @Step({"<key> li elementi bul ve varsa dokun", "Click element by <key> if exist"})
-    public void existTapByKey(String key) {
 
-        WebElement element = null;
-        try {
-            element = findElementByKey(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (element != null) {
-            element.click();
-        }
-    }
 
     @Step({"sayfadaki <X> <Y>  alana dokun"})
     public void coordinateTap(int X, int Y){
@@ -367,18 +313,6 @@ public class StepImpl extends HookImpl {
         }
         System.out.println("'" + text + "' written to '" + key + "' element.");
 
-    }
-
-    @Step({"<key> li elementi bul ve değerini <saveKey> olarak sakla",
-            "Find element by <key> and save text <saveKey>"})
-    public void saveTextByKey(String key, String saveKey) {
-        StoreHelper.INSTANCE.saveValue(saveKey, findElementByKey(key).getText());
-    }
-
-    @Step({"<key> li elementi bul ve değerini <saveKey> saklanan değer ile karşılaştır",
-            "Find element by <key> and compare saved key <saveKey>"})
-    public void equalsSaveTextByKey(String key, String saveKey) {
-        Assert.assertEquals(StoreHelper.INSTANCE.getValue(saveKey), findElementByKey(key).getText());
     }
 
 
@@ -790,12 +724,6 @@ public class StepImpl extends HookImpl {
         logger.info(key + " sayfa üzerinde bulundu");
     }
 
-
-    @Step({"<length> uzunlugunda random bir kelime üret ve <saveKey> olarak sakla"})
-    public void createRandomNumber(int length, String saveKey) {
-        StoreHelper.INSTANCE.saveValue(saveKey, new RandomString(length).nextString());
-    }
-
     @Step("geri butonuna bas")
     public void clickBybackButton() {
         if (!localAndroid) {
@@ -1036,55 +964,6 @@ public class StepImpl extends HookImpl {
 
 
 
-    @Step("<key> li elemente kadar <text> textine sahip değilse ve <timeout> saniyede bulamazsa swipe yappp")
-    public void swipeAndFindwithKey(String key, String text, int timeout) {
-
-
-        MobileElement sktYil1 = null;
-        SelectorInfo selectorInfo = selector.getSelectorInfo(key);
-        WebDriverWait wait = new WebDriverWait(appiumDriver, timeout);
-        int count = 0;
-        while (true) {
-            count++;
-            try {
-                sktYil1 = (MobileElement) wait.until(ExpectedConditions.visibilityOfElementLocated(selectorInfo.getBy()));
-                if (text.equals("") || sktYil1.getText().trim().equals(text)) {
-                    break;
-                }
-            } catch (Exception e) {
-                logger.info("Bulamadı");
-
-            }
-            if (count == 8) {
-
-                Assert.fail("Element bulunamadı");
-            }
-
-            Dimension dimension = appiumDriver.manage().window().getSize();
-            int startX1 = dimension.width / 2;
-            int startY1 = (dimension.height * 75) / 100;
-            int secondX1 = dimension.width / 2;
-            int secondY1 = (dimension.height * 30) / 100;
-
-            TouchAction action2 = new TouchAction(appiumDriver);
-
-            action2
-                    .press(PointOption.point(startX1, startY1))
-                    .waitAction(WaitOptions.waitOptions(ofMillis(2000)))
-                    .moveTo(PointOption.point(secondX1, secondY1))
-                    .release()
-                    .perform();
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-
     @Step("<key>li elementi bulana kadar <limit> kere swipe yap ve elementi bul")
     public void swipeKeyy(String key,int limit) throws InterruptedException {
 
@@ -1116,91 +995,14 @@ public class StepImpl extends HookImpl {
 
     }
 
-    @Step("Urun stokta var mi kontrol et")
-    public void stokKontrol() throws Exception {
 
-        logger.info("Stok kontrolüne girdi");
-        MobileElement element;
-        element = findElementByKeyWithoutAssert("haberdarEt");
-        waitBySecond(5);
-        if(element != null){
-            clickBybackButton();
-            waitBySecond(2);
-            swipeUpAccordingToPhoneSize();
-            waitBySecond(5);
-            clickByKey("hemenAlButonu");
-
-        }
-        logger.info("ürün stokta bulunuyor");
-
-    }
     private Long getTimestamp() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return (timestamp.getTime());
     }
 
-    @Step({"<key> li elementi bul, temizle ve rastgele email değerini yaz",
-            "Find element by <key> clear and send keys random email"})
-    public void RandomeMail(String key){
-        Long timestamp = getTimestamp();
-
-        MobileElement webElement = findElementByKey(key);
-        webElement.clear();
-        webElement.setValue("testotomasyon" + timestamp + "@getir.com");
-}
-
-@Step("Login kontrol")
-    public void loginControl() throws InterruptedException {
-if (appiumDriver instanceof AndroidDriver){
-    logger.info("Telefon işletim sistemi android !!!!!!!");
-    if (isElementPresent(By.id("com.koton.app:id/tv_login"))){
-        logger.info("Login alanı görünür olmadı");
-    }else{
-        logger.info("Login alanı görünür oldu");
-        swipe(3);
-
-        appiumDriver.findElement(By.id("com.koton.app:id/ll_logout")).click();
-        waitBySecond(3);
-        logger.info("Login kontrolü yapıldı ve logout işlemi gerçekleşti");
-
-    }
-}
-}
 
 
-@Step("Sepet kontrülü yap")
-    public void basketControl() throws InterruptedException {
-    WebElement basket = appiumDriver.findElement(By.id("com.koton.app:id/tv_cart_count_badge"));
-    int intBasket = 0;
-    String strBasket = basket.getText();
-
-    if (StringUtils.isNotEmpty(strBasket)) {
-        intBasket = Integer.parseInt(strBasket);
-
-        logger.info("Sepetteki ürün sayısının" + intBasket + " olduğu görüldü.");
-        if (intBasket > 0) {
-          appiumDriver.findElement(By.id("com.koton.app:id/iv_cart")).click();
-            logger.info("Sepet simgesine tıklandı.");
-            appiumDriver.findElement(By.id("com.koton.app:id/tv_edit_btn")).click();
-            logger.info("düzenle butonuna tıklandı");
-            waitBySecond(3);
-            List<MobileElement> deleteButtons = appiumDriver.findElements(By.id("com.koton.app:id/ll_delete"));
-            int elementsSize = deleteButtons.size();
-            logger.info("Sepetteki ürün sayısın ======"+deleteButtons.size());
-            for (int i=0;i< elementsSize;i++){
-                MobileElement element = deleteButtons.get(i);
-                element.click();
-            }
-
-
-            }
-
-            }
-
-
-
-
-}
 
 @Step("Dropdown dan key <key> alanını seç")
     public void selectDropdawnoNKey(String key){
@@ -1295,28 +1097,6 @@ if (appiumDriver instanceof AndroidDriver){
 
     }
 
-    @Step({"<key> li elementi bul ve değerini <saveKey> saklanan değer ile karşılaştır ve değişiklik oldugunu dogrula",
-            "Find element by <key> and compare saved key <saveKey>"})
-    public void equalsSaveTextByKeyNotequal(String key, String saveKey) {
-        appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        Assert.assertNotEquals(StoreHelper.INSTANCE.getValue(saveKey), findElementByKey(key).getText());
-    }
-    public static String randomNum(int stringLength) {
-        Random random = new Random();
-        char[] chars = "1234567890".toCharArray();
-        String stringRandom = "";
-        for (int i = 0; i < stringLength; i++) {
-            stringRandom = stringRandom + String.valueOf(chars[random.nextInt(chars.length)]);
-        }
-        return stringRandom;
-    }
-
-    @Step("<key> li elementine random telefon numarası yaz")
-    public void randomTel(String key){
-        String phoneNum = "558"+randomNum(7);
-        findElementByKey(key).sendKeys(phoneNum);
-    }
-
     @Step({"Check if element <key> contains text <expectedText>",
             "<key> elementi <text> değerini içeriyor mu kontrol et"})
     public void checkElementContainsText(String key, String expectedText){
@@ -1379,15 +1159,7 @@ if (appiumDriver instanceof AndroidDriver){
         }
     }
 
-    public List<MobileElement> findElemenstByKey2(String key) throws Exception {
-        SelectorInfo selectorInfo = selector.getSelectorInfo(key);
-        List<MobileElement> mobileElements ;
-      waitBySecond(10);
-        mobileElements = findElements(selectorInfo.getBy());
 
-
-        return mobileElements;
-    }
 
     ///////NEW///////
 
@@ -1431,7 +1203,23 @@ if (appiumDriver instanceof AndroidDriver){
             logger.info("Sepet boş...");
         }
     }
+    @Step ("Anasayfadaki kategorileri kontrol et")
+    public void categoryCount() {
+        List<MobileElement> listElements = findElemenstByKey("Category_List");
+        logger.info("Category items count: "+listElements.size());
 
+            Assert.assertTrue("Anasayfada yüklenmeyen kategori bulunuyor.",listElements.size()==13);
+
+
+    }
+    @Step("Rastgele sepete ürün ekleme adımını gerçekleştir")
+    public void chooseRandomProduct()
+
+    {
+      //  By by = appiumDriver.findElement("")
+      //  MobileElement allProductAddbutton = appiumDriver.findElement()
+
+    }
 }
 
 

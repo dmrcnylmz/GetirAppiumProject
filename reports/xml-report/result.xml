@@ -1,0 +1,8 @@
+<testsuites>
+	<testsuite id="1" tests="1" failures="0" package="/Users/testinium/Desktop/getirMobileProject/specs/android/getirScenerio.spec" time="28.526" timestamp="2021-01-17T23:29:44" name="Specification Heading" errors="0" hostname="testiniumsmbp2">
+		<properties></properties>
+		<testcase classname="Specification Heading" name="Case:1 Sucsess Login" time="28.526"></testcase>
+		<system-out></system-out>
+		<system-err></system-err>
+	</testsuite>
+</testsuites>
