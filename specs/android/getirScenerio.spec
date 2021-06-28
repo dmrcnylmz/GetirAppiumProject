@@ -1,6 +1,6 @@
 Specification Heading
 =====================
-Created by emresonmez on 14.01.2021
+Created by demircanyilmaz on 14.01.2021
 
 This is an executable specification file which follows markdown syntax.
 Every heading in this file denotes a scenario. Every bulleted point denotes a step.
